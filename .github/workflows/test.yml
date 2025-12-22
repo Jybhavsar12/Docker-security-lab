@@ -1,0 +1,29 @@
+name: Docker Security Lab CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build and test containers
+      run: |
+        docker compose up --build -d
+        sleep 10
+        
+        # Test vulnerable app is accessible
+        curl -f http://localhost:8080 || exit 1
+        
+        # Test security tools container
+        docker exec security-tools nmap --version || exit 1
+        docker exec security-tools sqlmap --version || exit 1
+        
+        # Cleanup
+        docker compose down
