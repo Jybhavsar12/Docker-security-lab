@@ -1,8 +1,8 @@
-# Docker Security Lab 🔒
+# Docker Security Lab
 
 A containerized cybersecurity learning environment featuring a vulnerable web application and penetration testing tools. Perfect for learning ethical hacking, vulnerability assessment, and Docker security concepts.
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 - Practice SQL injection and XSS attacks in a safe environment
 - Learn Docker containerization for security testing
@@ -10,7 +10,7 @@ A containerized cybersecurity learning environment featuring a vulnerable web ap
 - Understand web application vulnerabilities
 - Master container networking and isolation
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐
@@ -24,7 +24,7 @@ A containerized cybersecurity learning environment featuring a vulnerable web ap
 └─────────────────┘    └─────────────────┘
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Docker Desktop installed and running
@@ -47,7 +47,7 @@ docker ps
 - **Vulnerable Web App**: http://localhost:8080
 - **Security Tools**: `docker exec -it security-tools bash`
 
-## 🎮 Usage Guide
+## Usage Guide
 
 ### 1. Web Application Testing
 Visit http://localhost:8080 and try these attacks:
@@ -91,34 +91,34 @@ dirb http://vulnerable-web
 sqlmap -u "http://vulnerable-web" --forms --batch
 ```
 
-## 📚 Detailed Documentation
+## Detailed Documentation
 
 - [Vulnerability Guide](docs/vulnerabilities.md) - Detailed explanation of each vulnerability
 - [Tool Usage](docs/tools.md) - Complete guide to all security tools
 - [Attack Scenarios](docs/attacks.md) - Step-by-step attack walkthroughs
 - [Docker Guide](docs/docker.md) - Understanding the containerization
 
-## 🛡️ Security Considerations
+## Security Considerations
 
-⚠️ **WARNING**: This lab contains intentionally vulnerable code. 
+**WARNING**: This lab contains intentionally vulnerable code. 
 
 - Only run in isolated environments
 - Never deploy to production
 - Use for educational purposes only
 - Keep containers isolated from production networks
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Add new vulnerabilities or tools
 4. Submit a pull request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Built for cybersecurity education
 - Inspired by OWASP WebGoat and DVWA
