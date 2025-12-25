@@ -1,0 +1,28 @@
+services:
+  vulnerable-app:
+    build: ./vulnerable-app
+    ports:
+      - "8080:80"
+    networks:
+      - security-lab
+    container_name: vulnerable-web
+
+  vulnerable-ssh:
+    build: ./vulnerable-ssh
+    ports:
+      - "2222:22"
+    networks:
+      - security-lab
+    container_name: vulnerable-ssh
+
+  security-tools:
+    build: ./security-tools
+    networks:
+      - security-lab
+    container_name: security-tools
+    stdin_open: true
+    tty: true
+
+networks:
+  security-lab:
+    driver: bridge

@@ -126,3 +126,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 **Disclaimer**: This tool is for educational purposes only. Users are responsible for complying with applicable laws and regulations.
+
+## Security Automation
+
+### n8n Workflow Automation
+- **Access**: http://localhost:5678 (admin:password)
+- **Features**: 
+  - Automated security scans every 6 hours
+  - Nmap network discovery and service detection
+  - Nikto web vulnerability assessment
+  - Combined reporting with timestamps
+- **Workflow**: Import from `n8n-workflows/automated-security-scans.json`
+
+### Scan API Endpoints
+- **Nmap**: `http://localhost:8080/scan.php?action=nmap`
+- **Nikto**: `http://localhost:8080/scan.php?action=nikto`

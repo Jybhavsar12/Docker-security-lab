@@ -25,5 +25,16 @@ jobs:
         docker exec security-tools nmap --version || exit 1
         docker exec security-tools sqlmap --version || exit 1
         
+        # Test n8n automation
+        # Wait for n8n to be ready
+        sleep 15
+        
+        # Test scan endpoints
+        curl -f http://localhost:8080/scan.php?action=nmap || exit 1
+        curl -f http://localhost:8080/scan.php?action=nikto || exit 1
+        
+        # Test n8n is accessible
+        curl -f http://localhost:5678 || exit 1
+        
         # Cleanup
         docker compose down

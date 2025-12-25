@@ -1,0 +1,90 @@
+{
+  "name": "Security Scan Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://vulnerable-web/scan.php?action=nmap",
+        "options": {}
+      },
+      "name": "Nmap Scan",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "url": "http://vulnerable-web/scan.php?action=nikto",
+        "options": {}
+      },
+      "name": "Nikto Scan",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "functionCode": "const nmapResults = $node[\"Nmap Scan\"].json;\nconst niktoResults = $node[\"Nikto Scan\"].json;\n\nreturn {\n  json: {\n    timestamp: new Date().toISOString(),\n    scans: {\n      nmap: nmapResults,\n      nikto: niktoResults\n    },\n    summary: {\n      nmap_completed: nmapResults.scan_type === 'nmap',\n      nikto_completed: niktoResults.scan_type === 'nikto',\n      total_scans: 2\n    }\n  }\n};"
+      },
+      "name": "Process Results",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [680, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Nmap Scan",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Nikto Scan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nmap Scan": {
+      "main": [
+        [
+          {
+            "node": "Process Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nikto Scan": {
+      "main": [
+        [
+          {
+            "node": "Process Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
